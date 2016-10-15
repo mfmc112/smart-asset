@@ -23,8 +23,8 @@ import com.smartasset.asset.json.util.ElementList;
  */
 public class BaseGsonMapper<T> implements JsonMapper<T> {
 	
-	private Gson mapper;
 	private Class<T> elementClass;
+	protected Gson mapper;
 	
 	public BaseGsonMapper(Class<T> elementClass){
 		this.elementClass = elementClass;
@@ -38,7 +38,7 @@ public class BaseGsonMapper<T> implements JsonMapper<T> {
 	}
 	
 	protected void setMapperConfiguration(){
-		// TODO: add configuration here if needed
+		// extend this class and Override this method configure as needed
 	}
 
 	@Override
@@ -51,31 +51,31 @@ public class BaseGsonMapper<T> implements JsonMapper<T> {
 				list.add(fromObjectToJSON(content, elementClass));
 			}
 		}catch(Exception e){
-			throw new JsonException("Could not parse Json with Jackson", e);
+			throw new JsonException("Could not parse Json with Gson", e);
 		}
 		return list;
 	}
 	
-	/**
+	/*
 	 * Convert a single JSON to the Asset passed as generic.
 	 * 
 	 * @param json
 	 * @param elementClass
 	 * @return T
 	 */
-	protected T fromObjectToJSON(String json, Class<T> elementClass){
+	private T fromObjectToJSON(String json, Class<T> elementClass){
 		T asset = mapper.fromJson(json, new Element<T>(elementClass));
 		return asset;
 	}
 
-	/**
+	/*
 	 * Convert a JSON list into a List of asset passed as generic.
 	 * 
 	 * @param json
 	 * @param elementClass
 	 * @return List<T>
 	 */
-	protected List<T> fromArrayToJSON(String json, Class<T> elementClass){
+	private List<T> fromArrayToJSON(String json, Class<T> elementClass){
 		List<T> asset = mapper.fromJson(json, new ElementList<T>(elementClass));
 		return asset;
 	}
