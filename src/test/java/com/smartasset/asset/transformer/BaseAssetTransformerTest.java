@@ -10,8 +10,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.smartasset.asset.json.GsonMapperImpl;
-import com.smartasset.asset.json.JacksonMapperImpl;
+import com.smartasset.asset.json.BaseGsonMapper;
+import com.smartasset.asset.json.BaseJacksonMapper;
 import com.smartasset.asset.json.JsonMapperFactory;
 import com.smartasset.asset.json.MapperType;
 import com.smartasset.asset.test.Github;
@@ -73,7 +73,7 @@ public class BaseAssetTransformerTest {
 	@Test
 	public void inputStreamGsonMapper() throws Exception{
 		AssetTransformer<Github> transformer = new BaseAssetTransformer<Github>(Github.class);
-		transformer.setJSONMapper(new GsonMapperImpl<Github>(Github.class));
+		transformer.setJSONMapper(new BaseGsonMapper<Github>(Github.class));
 		List<Github> result = transformer.toAsset(inputStream);
 		
 	    Assert.assertTrue(result.size() == 1);
@@ -96,7 +96,7 @@ public class BaseAssetTransformerTest {
 	@Test
 	public void inputStreamJacksonMapper() throws Exception{
 		AssetTransformer<Github> transformer = new BaseAssetTransformer<Github>(Github.class);
-		transformer.setJSONMapper(new JacksonMapperImpl<Github>(Github.class));
+		transformer.setJSONMapper(new BaseJacksonMapper<Github>(Github.class));
 		List<Github> result = transformer.toAsset(inputStream);
 		
 	    Assert.assertTrue(result.size() == 1);
@@ -130,7 +130,7 @@ public class BaseAssetTransformerTest {
 	@Test
 	public void stringGsonMapper() throws Exception{
 		AssetTransformer<Github> transformer = new BaseAssetTransformer<Github>(Github.class);
-		transformer.setJSONMapper(new GsonMapperImpl<Github>(Github.class));
+		transformer.setJSONMapper(new BaseGsonMapper<Github>(Github.class));
 		List<Github> result = transformer.toAsset(jsonString);
 		
 	    Assert.assertTrue(result.size() == 1);
@@ -152,7 +152,7 @@ public class BaseAssetTransformerTest {
 	@Test
 	public void fromStringJacksonMapper() throws Exception{
 		AssetTransformer<Github> transformer = new BaseAssetTransformer<Github>(Github.class);
-		transformer.setJSONMapper(new JacksonMapperImpl<Github>(Github.class));
+		transformer.setJSONMapper(new BaseJacksonMapper<Github>(Github.class));
 		List<Github> result = transformer.toAsset(jsonString);
 		
 	    Assert.assertTrue(result.size() == 1);

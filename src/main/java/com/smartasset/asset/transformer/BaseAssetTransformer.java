@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import com.smartasset.asset.exception.JsonException;
-import com.smartasset.asset.json.JacksonMapperImpl;
+import com.smartasset.asset.json.BaseJacksonMapper;
 import com.smartasset.asset.json.JsonMapper;
 import com.smartasset.asset.json.MapperType;
 
@@ -29,7 +29,7 @@ public class BaseAssetTransformer<T> implements AssetTransformer<T> {
 	
 	@Override
 	public List<T> toAsset(String data) throws JsonException {
-		if (mapper == null) mapper = new JacksonMapperImpl<T>(elementClass);
+		if (mapper == null) mapper = new BaseJacksonMapper<T>(elementClass);
 		List<T> list = mapper.readValue(data);
 		return list;
 	}
@@ -57,10 +57,16 @@ public class BaseAssetTransformer<T> implements AssetTransformer<T> {
 	 *  
 	 * @param mapper
 	 */
+	@Override
 	public void setJSONMapper(JsonMapper<T> mapper) {
 		this.mapper = mapper;
 	}
 
+	/**
+	 * Get the type of the mapper created  used to parse JSON.
+	 *  
+	 * @param mapper
+	 */
 	@Override
 	public MapperType getMapperType() {
 		if (this.mapper == null) return null;

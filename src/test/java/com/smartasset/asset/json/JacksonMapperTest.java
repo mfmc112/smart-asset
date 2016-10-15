@@ -45,7 +45,7 @@ public class JacksonMapperTest {
 			"}]";
 	@Test
 	public void jacksonMapperArrayObject() throws JsonException{
-		JsonMapper<Github> mapper = new JacksonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseJacksonMapper<Github>(Github.class);
 		List<Github> list = mapper.readValue(jsonString);
 		Assert.assertTrue(list.size() == 1);
 		Assert.assertEquals("mfmc112", list.get(0).login);
@@ -53,7 +53,7 @@ public class JacksonMapperTest {
 	
 	@Test
 	public void jacksonMapperSingleObjectTest() throws JsonException{
-		JsonMapper<Github> mapper = new JacksonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseJacksonMapper<Github>(Github.class);
 		List<Github> list = mapper.readValue(jsonString.replace("[", "").substring(0, jsonString.length()-2));
 		Assert.assertTrue(list.size() == 1);
 		Assert.assertEquals("mfmc112", list.get(0).login);
@@ -61,7 +61,7 @@ public class JacksonMapperTest {
 	
 	@Test(expected=JsonException.class)
 	public void jacksonMapperInvalidObjectTest() throws JsonException{
-		JsonMapper<Github> mapper = new JacksonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseJacksonMapper<Github>(Github.class);
 		mapper.readValue(jsonString.substring(0, jsonString.length()-10));
 		Assert.assertTrue(false);
 	}

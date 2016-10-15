@@ -46,7 +46,7 @@ public class GsonMapperTest {
 	
 	@Test
 	public void gsonMapperArrayObject() throws JsonException{
-		JsonMapper<Github> mapper = new GsonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseGsonMapper<Github>(Github.class);
 		List<Github> list = mapper.readValue(jsonString);
 		Assert.assertTrue(list.size() == 1);
 		Assert.assertEquals("mfmc112", list.get(0).login);
@@ -54,7 +54,7 @@ public class GsonMapperTest {
 	
 	@Test
 	public void gsonMapperSingleObjectTest() throws JsonException{
-		JsonMapper<Github> mapper = new GsonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseGsonMapper<Github>(Github.class);
 		List<Github> list = mapper.readValue(jsonString.replace("[", "").substring(0, jsonString.length()-2));
 		Assert.assertTrue(list.size() == 1);
 		Assert.assertEquals("mfmc112", list.get(0).login);
@@ -62,7 +62,7 @@ public class GsonMapperTest {
 	
 	@Test(expected=JsonException.class)
 	public void gsonMapperInvalidObjectTest() throws JsonException{
-		JsonMapper<Github> mapper = new GsonMapperImpl<Github>(Github.class);
+		JsonMapper<Github> mapper = new BaseGsonMapper<Github>(Github.class);
 		mapper.readValue(jsonString.substring(0, jsonString.length()-10));
 		Assert.assertTrue(false);
 	}

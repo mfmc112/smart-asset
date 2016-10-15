@@ -21,15 +21,15 @@ import com.smartasset.asset.json.util.ElementList;
  *
  * @param <T>
  */
-public class GsonMapperImpl<T> implements JsonMapper<T> {
+public class BaseGsonMapper<T> implements JsonMapper<T> {
 	
 	private Gson mapper;
 	private Class<T> elementClass;
 	
-	public GsonMapperImpl(Class<T> elementClass){
+	public BaseGsonMapper(Class<T> elementClass){
 		this.elementClass = elementClass;
 		initialize();
-		configureMapper();
+		setMapperConfiguration();
 	}
 	
 	private void initialize(){
@@ -37,7 +37,7 @@ public class GsonMapperImpl<T> implements JsonMapper<T> {
 		this.mapper = builder.create();
 	}
 	
-	public void configureMapper(){
+	protected void setMapperConfiguration(){
 		// TODO: add configuration here if needed
 	}
 

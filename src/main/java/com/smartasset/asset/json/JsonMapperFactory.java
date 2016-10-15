@@ -10,11 +10,11 @@ public class JsonMapperFactory {
 		JsonMapper<T> mapper = null;
 		switch(type){
 			case GSON:
-				mapper = new GsonMapperImpl<T>(elementClass);
+				mapper = new BaseGsonMapper<T>(elementClass);
 				break;		
 			case JACKSON:
 			default:
-				mapper = new JacksonMapperImpl<T>(elementClass);
+				mapper = new BaseJacksonMapper<T>(elementClass);
 				break;
 		}
 		return mapper;

@@ -21,22 +21,22 @@ import com.smartasset.asset.exception.JsonException;
  *
  * @param <T>
  */
-public class JacksonMapperImpl<T> implements JsonMapper<T> {
+public class BaseJacksonMapper<T> implements JsonMapper<T> {
 
 	private Class<T> referenceClass;
-	private ObjectMapper mapper;
+	protected ObjectMapper mapper;
 	
-	public JacksonMapperImpl(Class<T> referenceClass){
+	public BaseJacksonMapper(Class<T> referenceClass){
 		this.referenceClass = referenceClass;
 		this.mapper = initialize();
-		configureMapper();
+		setMapperConfiguration();
 	}
 	
 	private ObjectMapper initialize() {
 		return new ObjectMapper();
 	}
 	
-	protected void configureMapper() {
+	protected void setMapperConfiguration() {
 		mapper.configure(Feature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
 		mapper.configure(Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 		mapper.configure(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
