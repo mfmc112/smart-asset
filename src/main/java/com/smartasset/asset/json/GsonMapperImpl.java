@@ -6,8 +6,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.smartasset.asset.exception.JsonException;
-import com.smartasset.asset.json.type.Element;
-import com.smartasset.asset.json.type.ElementList;
+import com.smartasset.asset.json.util.Element;
+import com.smartasset.asset.json.util.ElementList;
 
 /**
  * Responsible for converting JSON into Asset and vice-versa. 
