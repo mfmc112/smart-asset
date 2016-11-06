@@ -2,7 +2,7 @@ package com.smartasset.asset.transformer;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -56,8 +56,8 @@ public class BaseAssetTransformerTest {
 	InputStream inputStream;
 	
 	@Before
-	public void init(){
-		inputStream = new ByteArrayInputStream(jsonString.getBytes(StandardCharsets.UTF_8));
+	public void init() throws UnsupportedEncodingException {
+		inputStream = new ByteArrayInputStream(jsonString.getBytes("UTF-8"));
 	}
 	
 	@Test

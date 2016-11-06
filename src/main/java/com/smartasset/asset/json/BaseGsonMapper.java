@@ -43,6 +43,7 @@ public class BaseGsonMapper<T> implements JsonMapper<T> {
 
 	@Override
 	public List<T> readValue(String content) throws JsonException {
+		if (content == null) return null;
 		List<T> list = new ArrayList<T>();
 		try{
 			if (isArray(content)){
@@ -54,6 +55,21 @@ public class BaseGsonMapper<T> implements JsonMapper<T> {
 			throw new JsonException("Could not parse Json with Gson", e);
 		}
 		return list;
+	}
+	
+	@Override
+	public T readSingleValue(String content) throws JsonException {
+		if (content == null) return null;
+		try{
+			if (isArray(content)){
+				throw new JsonException("The content is an array");
+			}
+			return fromObjectToJSON(content, elementClass);
+		}catch(JsonException e){
+			throw e;
+		}catch(Exception e){
+			throw new JsonException("Could not parse Json with Gson", e);
+		}
 	}
 	
 	/*

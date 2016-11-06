@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Oct 21 20:39:42 CDT 2016
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=C\:\\server\\projects\\GIT\\smart-asset\\smart-asset.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

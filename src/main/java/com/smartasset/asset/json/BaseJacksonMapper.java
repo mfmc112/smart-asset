@@ -45,7 +45,7 @@ public class BaseJacksonMapper<T> implements JsonMapper<T> {
 	@Override
 	public List<T> readValue(String content) throws JsonException {
 		List <T> result = new ArrayList<T>(0);
-		if (content == null) return result;
+		if (content == null) return null;
 		try {
 			JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, referenceClass);
 			result = mapper.readValue(content, type);
@@ -56,6 +56,17 @@ public class BaseJacksonMapper<T> implements JsonMapper<T> {
 		return result;
 	}
 
+	@Override
+	public T readSingleValue(String content) throws JsonException {
+		if (content == null) return null;
+		try {
+			JavaType type = mapper.getTypeFactory().constructType(referenceClass);
+			return mapper.readValue(content, type);
+		} catch (Exception e) {
+			throw new JsonException("Could not parse Json with Jackson", e);
+		}
+	}
+	
 	@Override
 	public MapperType getType() {
 		return MapperType.JACKSON;

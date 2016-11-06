@@ -9,5 +9,7 @@ public interface JsonMapper<T> {
 
 	public List<T> readValue(String content) throws JsonException;
 	
+	public T readSingleValue(String content) throws JsonException;
+	
 	public MapperType getType();
 }
